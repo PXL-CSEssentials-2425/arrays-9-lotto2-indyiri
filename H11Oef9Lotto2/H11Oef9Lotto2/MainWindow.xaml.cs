@@ -23,6 +23,10 @@ namespace H11Oef9Lotto2
 
         Random rnd = new Random();
 
+        int[] numbers = new int[6];
+
+        int count = 1;
+
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -35,14 +39,27 @@ namespace H11Oef9Lotto2
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            int number1 = rnd.Next(1, 46);
-            int number2 = rnd.Next(1, 46);
-            int number3 = rnd.Next(1, 46);
-            int number4 = rnd.Next(1, 46);
-            int number5 = rnd.Next(1, 46);
-            int number6 = rnd.Next(1, 46);
+            resultTextBox.Clear();
+            count = 1;
 
-            resultTextBox.Text = $"Getal 1: {number1} \nGetal 2: {number2} \nGetal 3: {number3} \nGetal 4: {number4} \nGetal 5: {number5} \nGetal 6: {number6}";
+            for (int i = 0; i <= numbers.Length - 1; i++)
+            {
+                int temporaryNumber;
+                
+                do
+                {
+                    temporaryNumber = rnd.Next(1, 46);
+                }
+                while (Array.Exists(numbers, element => element == temporaryNumber));
+
+                numbers[i] = temporaryNumber;
+            }
+
+            foreach (int number in numbers)
+            {
+                resultTextBox.Text += $"Getal {count}: {number} \n";
+                count++;
+            }
         }
     }
 }
